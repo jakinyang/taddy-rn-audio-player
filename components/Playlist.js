@@ -5,7 +5,7 @@ import { Track } from './Track';
 
 export function Playlist() {
   const [tracks, setTracks] = useState([]);
-  
+
   useEffect(() => {
     async function getTracks() {
       const queue = await TrackPlayer.getQueue();
@@ -23,10 +23,13 @@ export function Playlist() {
 
   return (
     <View>
-      <FlatList 
+      <FlatList
         data={tracks}
-        renderItem={({item}) => (
-          <Track title={item.title} />
+        renderItem={({ item, index }) => (
+          <Track
+            index={index}
+            title={item.title}
+          />
         )}
       />
     </View>
