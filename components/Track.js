@@ -1,12 +1,23 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import React from 'react'
-import TrackPlayer from 'react-native-track-player'
+import React, { useState } from 'react'
+import TrackPlayer, { State } from 'react-native-track-player'
 
-export function Track({ title, index }) {
-
+export function Track({ title, index, selected, setSelected }) {
+  const [active, setActive] = useState(false)
   async function handlePlayPress() {
-    TrackPlayer.skip(index)
-    TrackPlayer.play()
+    let status = await TrackPlayer.getState();
+    if (selected === index && status === State.Playing) {
+      TrackPlayer.pause();
+      setActive(false)
+    } else if (selected === index && status === State.Paused) {
+      TrackPlayer.play();
+      setActive(true)
+    } else {
+      TrackPlayer.skip(index)
+      setActive(true)
+      setSelected(index)
+      TrackPlayer.play()
+    }
   }
   return (
     <View style={styles.container}>
@@ -14,7 +25,7 @@ export function Track({ title, index }) {
       <TouchableOpacity
         onPress={handlePlayPress}
       >
-        <Text>Play</Text>
+        <Text>{active && selected === index ? "Pause" : "Play"}</Text>
       </TouchableOpacity>
     </View>
   )

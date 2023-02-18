@@ -5,6 +5,7 @@ import { Track } from './Track';
 
 export function Playlist() {
   const [tracks, setTracks] = useState([]);
+  const [selected, setSelected] = useState();
 
   useEffect(() => {
     async function getTracks() {
@@ -29,6 +30,8 @@ export function Playlist() {
           <Track
             index={index}
             title={item.title}
+            selected={selected}
+            setSelected={setSelected}
           />
         )}
       />
