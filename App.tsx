@@ -6,20 +6,15 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import type { PropsWithChildren } from 'react';
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
   Text,
-  TouchableOpacity,
-  useColorScheme,
-  View,
 } from 'react-native';
 import { addTracks, setupPlayer } from './service';
 import TrackPlayer from 'react-native-track-player';
 import { ControlGroup } from './components/ControlGroup';
+import { Playlist } from './components/Playlist'
 
 function App() {
   const [playerReady, setPlayerReady] = useState(false);
@@ -44,6 +39,7 @@ function App() {
   }
   return (
     <SafeAreaView style={styles.container}>
+      <Playlist />
       <ControlGroup />
     </SafeAreaView>
   );
@@ -52,7 +48,6 @@ function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center'
   }
 });
