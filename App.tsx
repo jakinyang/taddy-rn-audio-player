@@ -44,9 +44,6 @@ function App() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => TrackPlayer.play()}>
-        <Text>Play</Text>
-      </TouchableOpacity>
       <ControlGroup />
     </SafeAreaView>
   );
