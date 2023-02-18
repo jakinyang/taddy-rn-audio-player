@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 import { addTracks, setupPlayer } from './service';
 import TrackPlayer from 'react-native-track-player';
+import { ControlGroup } from './components/ControlGroup';
 
 function App() {
   const [playerReady, setPlayerReady] = useState(false);
@@ -43,9 +44,7 @@ function App() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity onPress={() => TrackPlayer.play()}>
-        <Text>Play</Text>
-      </TouchableOpacity>
+      <ControlGroup />
     </SafeAreaView>
   );
 }
