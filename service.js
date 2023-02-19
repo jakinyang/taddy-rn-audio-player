@@ -1,5 +1,6 @@
 import TrackPlayer from "react-native-track-player";
 
+// Setup and Add functions return true as indicator that everything is loaded and good to go
 export async function setupPlayer() {
   await TrackPlayer.setupPlayer();
   return true;
