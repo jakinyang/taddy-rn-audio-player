@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from 'react-native'
+import { View, Text, FlatList, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import TrackPlayer from 'react-native-track-player';
 import { Track } from './Track';
@@ -23,13 +23,13 @@ export function Playlist() {
   }
 
   return (
-    <View>
+    <View style={styles.container}>
       <FlatList
         data={tracks}
         renderItem={({ item, index }) => (
           <Track
             index={index}
-            title={item.title}
+            data={item}
             selected={selected}
             setSelected={setSelected}
           />
@@ -38,3 +38,9 @@ export function Playlist() {
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop: 100,
+  }
+})
