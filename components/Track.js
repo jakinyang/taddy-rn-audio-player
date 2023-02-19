@@ -2,30 +2,39 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React, { useState } from 'react'
 import TrackPlayer, { Event, State, useTrackPlayerEvents } from 'react-native-track-player'
 
-export function Track({ data, index, active, setActive }) {
+export function Track({ data, index }) {
   const [currentTrack, setCurrentTrack] = useState(0)
+  const [playing, setPlaying] = useState(false)
 
   async function handlePlayPress() {
     let status = await TrackPlayer.getState();
     if (currentTrack === index) {
       if (status === State.Playing) {
         TrackPlayer.pause();
-        setActive(false)
         return
       }
       TrackPlayer.play();
-      setActive(true)
       return
     }
     TrackPlayer.skip(index)
-    setActive(true)
     setCurrentTrack(index)
     TrackPlayer.play()
   }
 
-  useTrackPlayerEvents([Event.PlaybackTrackChanged], async () => {
-    let currentIndex = await TrackPlayer.getCurrentTrack();
-    setCurrentTrack(currentIndex)
+  useTrackPlayerEvents([Event.PlaybackTrackChanged, Event.PlaybackState], async (event) => {
+    if (event.type === Event.PlaybackTrackChanged) {
+      let currentIndex = await TrackPlayer.getCurrentTrack();
+      setCurrentTrack(currentIndex);
+    }
+    if (event.type === Event.PlaybackState) {
+      let status = await TrackPlayer.getState();
+      if (status === State.Playing) {
+        setPlaying(true);
+      }
+      if (status === State.Paused) {
+        setPlaying(false);
+      }
+    }
   })
   return (
     <View style={styles.container}>
@@ -39,7 +48,7 @@ export function Track({ data, index, active, setActive }) {
 
       </View>
       <TouchableOpacity style={styles.button} onPress={handlePlayPress}>
-        <Text style={styles.text}>{active && currentTrack === index ? "Pause" : "Play"}</Text>
+        <Text style={styles.text}>{playing && currentTrack === index ? "Pause" : "Play"}</Text>
       </TouchableOpacity>
     </View>
   )

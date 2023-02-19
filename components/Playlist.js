@@ -3,9 +3,8 @@ import React, { useEffect, useState } from 'react'
 import TrackPlayer from 'react-native-track-player';
 import { Track } from './Track';
 
-export function Playlist({active, setActive}) {
+export function Playlist() {
   const [tracks, setTracks] = useState([]);
-  const [selected, setSelected] = useState();
 
   useEffect(() => {
     async function getTracks() {
@@ -26,14 +25,7 @@ export function Playlist({active, setActive}) {
     <View style={styles.container}>
       <FlatList
         data={tracks}
-        renderItem={({ item, index }) => (
-          <Track
-            index={index}
-            data={item}
-            active={active}
-            setActive={setActive}
-          />
-        )}
+        renderItem={({ item, index }) => (<Track index={index} data={item} />)}
       />
     </View>
   )
