@@ -2,9 +2,7 @@ import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native'
 import React, { useState } from 'react'
 import TrackPlayer, { State } from 'react-native-track-player'
 
-export function Track({ data, index, selected, setSelected }) {
-  const [active, setActive] = useState(false)
-
+export function Track({ data, index, selected, setSelected, active, setActive }) {
   async function handlePlayPress() {
     let status = await TrackPlayer.getState();
     if (selected === index) {

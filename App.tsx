@@ -18,6 +18,7 @@ import { Playlist } from './components/Playlist'
 
 function App() {
   const [playerReady, setPlayerReady] = useState(false);
+  const [active, setActive] = useState(false)
 
   useEffect(() => {
     async function ready() {
@@ -39,7 +40,7 @@ function App() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <Playlist />
+      <Playlist active={active} setActive={setActive} />
       <ControlGroup />
     </SafeAreaView>
   );

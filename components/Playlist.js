@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import TrackPlayer from 'react-native-track-player';
 import { Track } from './Track';
 
-export function Playlist() {
+export function Playlist({active, setActive}) {
   const [tracks, setTracks] = useState([]);
   const [selected, setSelected] = useState();
 
@@ -32,6 +32,8 @@ export function Playlist() {
             data={item}
             selected={selected}
             setSelected={setSelected}
+            active={active}
+            setActive={setActive}
           />
         )}
       />
