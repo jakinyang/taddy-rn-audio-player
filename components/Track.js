@@ -7,9 +7,8 @@ export function Track({ data, index }) {
   const [playing, setPlaying] = useState(false)
 
   async function handlePlayPress() {
-    let status = await TrackPlayer.getState();
     if (currentTrack === index) {
-      if (status === State.Playing) {
+      if (playing) {
         TrackPlayer.pause();
         return
       }

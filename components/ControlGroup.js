@@ -5,8 +5,7 @@ import TrackPlayer, { State, useTrackPlayerEvents, Event } from 'react-native-tr
 export function ControlGroup() {
   const [playing, setPlaying] = useState(false);
   async function handlePlayPress() {
-    let status = await TrackPlayer.getState();
-    if (status === State.Playing) {
+    if (playing) {
       TrackPlayer.pause();
       return
     }
