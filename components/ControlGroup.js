@@ -1,8 +1,28 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import React from 'react'
-import TrackPlayer from 'react-native-track-player'
+import React, { useState } from 'react'
+import TrackPlayer, { State, useTrackPlayerEvents, Event } from 'react-native-track-player'
 
 export function ControlGroup() {
+  const [playing, setPlaying] = useState(false);
+  async function handlePlayPress() {
+    if (playing) {
+      TrackPlayer.pause();
+      return
+    }
+    TrackPlayer.play();
+    return
+  }
+
+  useTrackPlayerEvents([Event.PlaybackState], async () => {
+    let status = await TrackPlayer.getState();
+    if (status === State.Playing) {
+      setPlaying(true);
+    }
+    if (status === State.Paused) {
+      setPlaying(false);
+    }
+  })
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -10,12 +30,8 @@ export function ControlGroup() {
         <Text style={styles.button}>Previous</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => TrackPlayer.play()}>
-        <Text style={styles.button}>Play</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        onPress={() => TrackPlayer.pause()}>
-        <Text style={styles.button}>Pause</Text>
+        onPress={handlePlayPress}>
+        <Text style={styles.button}>{playing ? "Pause" : "Play"}</Text>
       </TouchableOpacity>
       <TouchableOpacity
         onPress={() => TrackPlayer.skipToNext()}>

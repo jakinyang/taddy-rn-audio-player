@@ -5,7 +5,6 @@ import { Track } from './Track';
 
 export function Playlist() {
   const [tracks, setTracks] = useState([]);
-  const [selected, setSelected] = useState();
 
   useEffect(() => {
     async function getTracks() {
@@ -26,14 +25,7 @@ export function Playlist() {
     <View style={styles.container}>
       <FlatList
         data={tracks}
-        renderItem={({ item, index }) => (
-          <Track
-            index={index}
-            data={item}
-            selected={selected}
-            setSelected={setSelected}
-          />
-        )}
+        renderItem={({ item, index }) => (<Track index={index} data={item} />)}
       />
     </View>
   )
