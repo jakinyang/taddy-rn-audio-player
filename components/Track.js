@@ -8,11 +8,7 @@ export function Track({ data, index }) {
 
   async function handlePlayPress() {
     if (currentTrack === index) {
-      if (playing) {
-        TrackPlayer.pause();
-        return
-      }
-      TrackPlayer.play();
+      playing ? TrackPlayer.pause() : TrackPlayer.play()
       return
     }
     TrackPlayer.skip(index)
