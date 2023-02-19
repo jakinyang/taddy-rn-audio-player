@@ -6,13 +6,8 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-} from 'react-native';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import { addTracks, setupPlayer } from './service';
-import TrackPlayer from 'react-native-track-player';
 import { ControlGroup } from './components/ControlGroup';
 import { Playlist } from './components/Playlist'
 

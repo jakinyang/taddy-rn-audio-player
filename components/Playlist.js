@@ -13,6 +13,7 @@ export function Playlist() {
     };
     getTracks();
   }, []);
+  
   if (!tracks) {
     return (
       <View>
