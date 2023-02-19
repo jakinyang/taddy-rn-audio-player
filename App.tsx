@@ -41,7 +41,7 @@ function App() {
   return (
     <SafeAreaView style={styles.container}>
       <Playlist active={active} setActive={setActive} />
-      <ControlGroup />
+      <ControlGroup active={active} setActive={setActive}/>
     </SafeAreaView>
   );
 }

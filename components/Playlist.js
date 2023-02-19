@@ -30,8 +30,6 @@ export function Playlist({active, setActive}) {
           <Track
             index={index}
             data={item}
-            selected={selected}
-            setSelected={setSelected}
             active={active}
             setActive={setActive}
           />
