@@ -36,7 +36,11 @@ export function Track({ data, index }) {
     }
   })
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        ...styles.container,
+        ...{ backgroundColor: currentTrack === index ? 'lightslategray' : 0x031A26 }
+      }}>
       <Image
         style={styles.image}
         source={{ uri: data.artwork }}
@@ -59,7 +63,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 10,
-    backgroundColor: 'lightslategray',
     alignSelf: 'flex-end'
   },
   textContainer: {
