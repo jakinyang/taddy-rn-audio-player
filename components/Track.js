@@ -16,6 +16,7 @@ export function Track({ data, index }) {
     TrackPlayer.play()
   }
 
+  // currentTrack and playing are set everytime the Playback State changes or the Track is changed
   useTrackPlayerEvents([Event.PlaybackTrackChanged, Event.PlaybackState], async (event) => {
     if (event.type === Event.PlaybackTrackChanged) {
       let currentIndex = await TrackPlayer.getCurrentTrack();
